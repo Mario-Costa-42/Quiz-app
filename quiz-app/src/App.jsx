@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
-
+import {FaTwitter,FaFacebook,FaInstagram} from 'react-icons/fa'
 
 const App = () => {
     const [quizzes, setQuizzes] = useState([]);
@@ -108,12 +108,28 @@ const App = () => {
         return achievedPercentage >= passPercentage ? 'Congratulations! You passed!' : 'Better luck next time!';
     };
 
-    const handleShareResult = () => {
+    const handleShareResultTwitter = () => {
         const message = `I scored ${score}/${questions.length} on the ${quizzes.find(q => q.id === selectedQuiz).name} quiz! Try it out!`;
-        const url = encodeURIComponent(`https://yourquizapp.com`);
+        const url = encodeURIComponent(`https://yourquizapp.com`);// link to the github hostpage later 
         const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${url}`;
         window.open(shareUrl, '_blank');
     };
+    ////add other links here below 
+    const handleShareResultFacebook = () => {
+        const message = `I scored ${score}/${questions.length} on the ${quizzes.find(q => q.id === selectedQuiz).name} quiz! Try it out!`;
+        const url = encodeURIComponent(`https://yourquizapp.com`); // link to the GitHub host page later
+        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${encodeURIComponent(message)}`;
+        window.open(shareUrl, '_blank');
+    };
+
+    const handleShareResultInstagram = () => {
+        const message = `I scored ${score}/${questions.length} on the ${quizzes.find(q => q.id === selectedQuiz).name} quiz! Try it out!`;
+        const url = `https://yourquizapp.com`; // link to the GitHub host page later
+        const instagramUrl = `https://www.instagram.com/create/story/?background_image=${encodeURIComponent(url)}&text=${encodeURIComponent(message)}`;
+        window.open(instagramUrl, '_blank');
+    };
+    
+    
 
     return (
         <div className="app">
@@ -139,7 +155,9 @@ const App = () => {
                     <p>Your score: {score} / {questions.length}</p>
                     <p>Time taken: {calculateTimeTaken()}</p>
                     <p>{getPassMessage()}</p>
-                    <button onClick={handleShareResult}>Share your result</button>
+                    <FaTwitter onClick={handleShareResultTwitter} className='shareButtons'></FaTwitter>
+                    <FaFacebook onClick={handleShareResultFacebook} className='shareButtons'></FaFacebook>
+                    <FaInstagram onClick={handleShareResultInstagram} className='shareButtons'></FaInstagram>
                 </div>
             ) : questions.length > 0 ? (
                 <div className="quiz">

@@ -102,3 +102,7 @@ button:disabled {
   margin-top: 20px;
 }
 
+.shareButtons{
+  padding: 6px;
+  cursor: pointer;
+}
